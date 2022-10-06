@@ -1,16 +1,32 @@
 #include <SoftwareSerial.h>
-SoftwareSerial xbeeSerial(2,3); //RX, TX
+SoftwareSerial xbeeSerial(2, 3); //RX, TX
+char reciveChar = 'x';
 
 void setup() {
-   Serial.begin(9600);
-   xbeeSerial.begin(9600);
+  Serial.begin(9600);
+  xbeeSerial.begin(9600);
+  pinMode(4, OUTPUT);            // Blue
+  pinMode(6, OUTPUT);            // Orange
 }
 
 void loop() {
-   //Serial.println();
-   if(xbeeSerial.available() > 0){
-      
-      Serial.print((char)xbeeSerial.read());
-      
-   }
+
+  if (xbeeSerial.available() > 0) {
+
+    reciveChar = xbeeSerial.read();
+  }
+    Serial.println(reciveChar);
+    delay(10);
+    if (reciveChar == '+')
+    {
+      digitalWrite(4, HIGH);
+      digitalWrite(6, LOW);
+      reciveChar = 'b';
+    }
+    else if(reciveChar != '+') 
+    {
+      digitalWrite(6, HIGH);
+      digitalWrite(4, LOW);
+    }
+
 }
