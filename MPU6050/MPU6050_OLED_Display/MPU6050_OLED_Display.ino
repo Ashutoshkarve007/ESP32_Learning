@@ -5,14 +5,14 @@
 
 Adafruit_MPU6050 mpu;
 Adafruit_SSD1306 display = Adafruit_SSD1306(128, 64, &Wire);
-SoftwareSerial xbeeSerial(2,3); //RX, TX
+//SoftwareSerial xbeeSerial(2,3); //RX, TX
 
 void setup() {
   Serial.begin(115200);
-  xbeeSerial.begin(9600);
+ // xbeeSerial.begin(9600);
   delay(10);
-    pinMode(4, OUTPUT);            // Blue
-  pinMode(5, OUTPUT);            // Orange
+//    pinMode(4, OUTPUT);            // Blue
+ // pinMode(5, OUTPUT);            // Orange
 
   
   // while (!Serial);
@@ -31,14 +31,14 @@ void setup() {
     for (;;)
       ; // Don't proceed, loop forever
   }
-  display.display();
+//  display.display();
   delay(500); // Pause for 2 seconds
   display.setTextSize(1);
   display.setTextColor(WHITE);
   display.setRotation(0);
 
-      digitalWrite(4,HIGH);
-      digitalWrite(5,HIGH);
+//      digitalWrite(4,HIGH);
+//      digitalWrite(5,HIGH);
       
 }
 
