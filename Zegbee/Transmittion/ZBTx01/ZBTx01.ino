@@ -5,9 +5,9 @@ void setup() {
    Serial.begin(9600);
    xbeeSerial.begin(9600);
    pinMode(4, OUTPUT);
-   pinMode(5, OUTPUT);
+   pinMode(15, OUTPUT);
    digitalWrite(4, HIGH);
-   digitalWrite(5, HIGH);
+   digitalWrite(15, HIGH);
 }
 
 void loop() {
