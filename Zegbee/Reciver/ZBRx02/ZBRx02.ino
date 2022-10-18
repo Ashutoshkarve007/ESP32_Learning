@@ -3,8 +3,8 @@ SoftwareSerial xbeeSerial(16, 17); //RX, TX 2 3
 char reciveChar = 'x';
 
 void setup() {
-  Serial.begin(9600);
-  xbeeSerial.begin(9600);
+  Serial.begin(115200);
+  xbeeSerial.begin(115200);
   pinMode(4, OUTPUT);            // Blue
   pinMode(5, OUTPUT);            // Orange
 
