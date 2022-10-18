@@ -3,13 +3,14 @@ SoftwareSerial xbeeSerial(16, 17); //RX, TX 2 3
 char reciveChar = 'x';
 
 void setup() {
-  Serial.begin(115200);
-  xbeeSerial.begin(115200);
+  Serial.begin(9600);
+  xbeeSerial.begin(9600);
+  
   pinMode(4, OUTPUT);            // Blue
   pinMode(5, OUTPUT);            // Orange
 
-        digitalWrite(4, HIGH);
-      digitalWrite(5, HIGH);
+  digitalWrite(4, HIGH);
+  digitalWrite(5, HIGH);
 }
 
 void loop() {
@@ -18,18 +19,16 @@ void loop() {
 
     reciveChar = xbeeSerial.read();
   }
-    Serial.println(reciveChar);
-    delay(10);
-    if (reciveChar == '+')
-    {
-      digitalWrite(4, HIGH);
-      digitalWrite(5, LOW);
-      reciveChar = 'b';
-    }
-    else if(reciveChar != '+') 
-    {
-      digitalWrite(5, HIGH);
-      digitalWrite(4, LOW);
-    }
-    delay(100);
+  Serial.println(reciveChar);
+
+  if (reciveChar == '+')
+  {
+    digitalWrite(4, HIGH);
+    reciveChar = 'b';
+  }
+  else
+  {
+    digitalWrite(4, LOW);
+  }
+  delay(10);
 }

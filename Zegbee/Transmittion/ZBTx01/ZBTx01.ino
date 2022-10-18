@@ -2,8 +2,8 @@
 SoftwareSerial xbeeSerial(16,17); //RX, TX
 
 void setup() {
-   Serial.begin(115200);
-   xbeeSerial.begin(115200);
+   Serial.begin(9600);
+   xbeeSerial.begin(9600);
    pinMode(4, OUTPUT);
    pinMode(5, OUTPUT);
    digitalWrite(4, HIGH);
