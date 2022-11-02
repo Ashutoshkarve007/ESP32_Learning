@@ -42,8 +42,8 @@ float temperature;
 
 //Gyroscope sensor deviation
 float gyroXerror = 0.07;
-float gyroYerror = 0.03;
-float gyroZerror = 0.01;
+float gyroYerror = 0.05;
+float gyroZerror = 0.02;
 
 // Init MPU6050
 void initMPU(){
@@ -68,6 +68,9 @@ void initOLED(){
   display.setTextSize(1);
   display.setTextColor(WHITE);
   display.setRotation(0);
+  
+
+
 }
 
 void initSPIFFS() {
@@ -95,36 +98,38 @@ String getGyroReadings(){
   mpu.getEvent(&a, &g, &temp);
 
   float gyroX_temp = g.gyro.x;
+
   if(abs(gyroX_temp) > gyroXerror)  {
     gyroX += gyroX_temp/50.00;
+
   }
   
   float gyroY_temp = g.gyro.y;
   if(abs(gyroY_temp) > gyroYerror) {
-    gyroY += gyroY_temp/70.00;
+    gyroY += gyroY_temp/0.01;
   }
 
   float gyroZ_temp = g.gyro.z;
   if(abs(gyroZ_temp) > gyroZerror) {
-    gyroZ += gyroZ_temp/90.00;
+    gyroZ += gyroZ_temp/50.00;
   }
 
-  display.clearDisplay();
-  display.setCursor(0, 0);
-  display.println(" ");
-  display.println("+++++++QUROLABS++++++");
-  display.println("+                   +");
-  display.println("+   Gyroscope_rps   +");
-  display.println("+                   +");
-  display.print("  ");
-  display.print(g.gyro.x, 1);
-  display.print(", ");
-  display.print(g.gyro.y, 1);
-  display.print(", ");
-  display.print(g.gyro.z, 1);
-  display.println(" ");
-  display.println("+                   +");
-  display.println("+++++++++++++++++++++");
+//  display.clearDisplay();
+//  display.setCursor(0, 0);
+//  display.println(" ");
+//  display.println("+++++++QUROLABS++++++");
+//  display.println("+                   +");
+//  display.println("+   Gyroscope_rps   +");
+//  display.println("+                   +");
+//  display.print("  ");
+//  display.print(g.gyro.x, 1);
+//  display.print(", ");
+//  display.print(g.gyro.y, 1);
+//  display.print(", ");
+//  display.print(g.gyro.z, 1);
+//  display.println(" ");
+//  display.println("+                   +");
+//  display.println("+++++++++++++++++++++");
   
   readings["gyroX"] = String(gyroX);
   readings["gyroY"] = String(gyroY);
@@ -203,6 +208,12 @@ void setup() {
   server.addHandler(&events);
 
   server.begin();
+  delay(10);
+  display.clearDisplay();
+  display.setCursor(0, 0);
+  display.println(" ");
+  display.println("+++++++QUROLABS++++++");
+  display.display();
 }
 
 void loop() {
@@ -219,12 +230,12 @@ void loop() {
     events.send(getAccReadings().c_str(),"accelerometer_readings",millis());
     lastTimeAcc = millis();
   }
-  if ((millis() - lastTimeTemperature) > temperatureDelay) {
-    // Send Events to the Web Server with the Sensor Readings
-    events.send(getTemperature().c_str(),"temperature_reading",millis());
-    lastTimeTemperature = millis();
-  }
+//  if ((millis() - lastTimeTemperature) > temperatureDelay) {
+//    // Send Events to the Web Server with the Sensor Readings
+//    events.send(getTemperature().c_str(),"temperature_reading",millis());
+//    lastTimeTemperature = millis();
+//  }
 
-  display.display();
+ // display.display();
  // delay(10);
 }
