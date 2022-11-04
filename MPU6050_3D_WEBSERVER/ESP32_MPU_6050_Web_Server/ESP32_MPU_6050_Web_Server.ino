@@ -42,8 +42,8 @@ float temperature;
 
 //Gyroscope sensor deviation
 float gyroXerror = 0.07;
-float gyroYerror = 0.05;
-float gyroZerror = 0.02;
+float gyroYerror = 0.01;
+float gyroZerror = 0.01;
 
 // Init MPU6050
 void initMPU(){
@@ -106,7 +106,7 @@ String getGyroReadings(){
   
   float gyroY_temp = g.gyro.y;
   if(abs(gyroY_temp) > gyroYerror) {
-    gyroY += gyroY_temp/0.01;
+    gyroY += gyroY_temp/50.00;
   }
 
   float gyroZ_temp = g.gyro.z;
