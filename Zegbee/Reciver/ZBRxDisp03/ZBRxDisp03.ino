@@ -42,16 +42,18 @@ void setup() {
 
 void loop() {
 
-  //display.clearDisplay();
+  display.clearDisplay();
   display.setCursor(0, 0);
+   display.println("Temperature : ");
   if (xbeeSerial.available() > 0) {
-    display.println("Temperature : ");
+  //  display.println("Temperature : ");
 
     reciveChar = xbeeSerial.read();
   display.print(reciveChar);
  // display.print('167');
   display.print("C");
   Serial.println(reciveChar);
+  
   }
   
  
@@ -65,6 +67,7 @@ void loop() {
 //  {
 //    digitalWrite(4, LOW);
 //  }
+
  display.display();
-//  delay(10);
+   delay(10);
 }
